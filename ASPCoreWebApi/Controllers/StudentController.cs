@@ -12,30 +12,32 @@ namespace ASPCoreWebApi.Controllers
 
 
 
-        public static List<Student> students = new List<Student>()
-        {
+        //public static List<Student> students = new List<Student>()
+        //{
               
-                new Student
-                {
-                    Id = 1,
-                    Name = "Student 1",
-                    Address = "Address 1",
-                    Email = "Abc@gmail.com"
-                },
-                new Student
-                {
-                    Id = 2,
-                    Name = "Student 2",
-                    Address = "Address 2",
-                    Email = "Abc2@gmail.com"
-                }
+        //        new Student
+        //        {
+        //            Id = 1,
+        //            Name = "Student 1",
+        //            Address = "Address 1",
+        //            Email = "Abc@gmail.com"
+        //        },
+        //        new Student
+        //        {
+        //            Id = 2,
+        //            Name = "Student 2",
+        //            Address = "Address 2",
+        //            Email = "Abc2@gmail.com"
+        //        }
 
-        };
+        //};
 
         [HttpGet]
         public List<Student> getstudents()
         {
-            return students;
+            // return students;
+
+            return StudentRepository.students;
 
             //return new List<Student>
             //{
@@ -59,7 +61,7 @@ namespace ASPCoreWebApi.Controllers
         [HttpGet("{id:int}")]
         public Student getallstudent(int id) {
         
-            return students.FirstOrDefault(x=> x.Id==id);
+            return StudentRepository.students.FirstOrDefault(x=> x.Id==id);
         
         }
 
