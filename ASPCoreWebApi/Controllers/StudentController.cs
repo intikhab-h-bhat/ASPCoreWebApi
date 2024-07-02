@@ -33,7 +33,8 @@ namespace ASPCoreWebApi.Controllers
         //};
 
         [HttpGet]
-        public List<Student> getstudents()
+        [Route("All",Name ="GetAllStudents")]
+        public List<Student> Getstudents()
         {
             // return students;
 
@@ -65,6 +66,12 @@ namespace ASPCoreWebApi.Controllers
         
         }
 
+        [HttpGet("{name:alpha}")]
+        public Student getallstudent(string name)
+        {
 
+            return StudentRepository.students.FirstOrDefault(x => x.Name == name);
+
+        }
     }
 }

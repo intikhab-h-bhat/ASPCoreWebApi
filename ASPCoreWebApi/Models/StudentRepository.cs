@@ -9,7 +9,7 @@
                 new Student
                 {
                     Id = 1,
-                    Name = "Student 1",
+                    Name = "Intikhab",
                     Address = "Address 1",
                     Email = "Abc@gmail.com"
                 },
