@@ -35,12 +35,13 @@ namespace ASPCoreWebApi.Controllers
                     {
                         return BadRequest(user.Id + " already exist");
                     }
-                    else
-                    {
-                        users.Add(request);
+                    //else
+                    //{
+                    //    users.Add(request);
                      
-                    }
+                    //}
                 }
+                users.Add(request);
             }
             else
             {
