@@ -1,5 +1,5 @@
 ﻿
-namespace ASPCoreWebApi.Model
+namespace ASPCoreWebApi.Models
 {
     public class User
     {

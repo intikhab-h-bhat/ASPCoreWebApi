@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using ASPCoreWebApi.Model;
+using ASPCoreWebApi.Models;
 using System.Reflection;
 
 namespace ASPCoreWebApi.Controllers
