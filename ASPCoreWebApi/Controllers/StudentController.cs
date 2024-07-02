@@ -34,11 +34,12 @@ namespace ASPCoreWebApi.Controllers
 
         [HttpGet]
         [Route("All",Name ="GetAllStudents")]
-        public List<Student> Getstudents()
+        public ActionResult<List<Student>> Getstudents()
         {
             // return students;
 
-            return StudentRepository.students;
+            //OK -200 status
+            return Ok(StudentRepository.students);
 
             //return new List<Student>
             //{
@@ -60,17 +61,34 @@ namespace ASPCoreWebApi.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public Student getallstudent(int id) {
+        public ActionResult<Student> getallstudent(int id) {
         
-            return StudentRepository.students.FirstOrDefault(x=> x.Id==id);
+            if (id <= 0)
+            {
+                // Badrequest -400 status
+                return BadRequest("The id cannot be 0 or less than 0");
+            }
+
+            var student = StudentRepository.students.FirstOrDefault(x => x.Id == id);
+            if (student == null)           
+                // NotFound -404 status
+                return NotFound($"The student id {id} you are looking doesnot exist");
+            
+            // Ok -200 status
+            return Ok(StudentRepository.students.FirstOrDefault(x=> x.Id==id));
         
         }
 
         [HttpGet("{name:alpha}")]
-        public Student getallstudent(string name)
+        public ActionResult<Student> getallstudent(string name)
         {
+            if (name == null)
+            {
+                return NotFound("The");
+            }
 
-            return StudentRepository.students.FirstOrDefault(x => x.Name == name);
+            // OK -200 status
+            return Ok(StudentRepository.students.FirstOrDefault(x => x.Name == name));
 
         }
     }
