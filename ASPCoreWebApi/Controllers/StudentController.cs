@@ -61,6 +61,9 @@ namespace ASPCoreWebApi.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public ActionResult<Student> getallstudent(int id) {
         
             if (id <= 0)
