@@ -64,7 +64,7 @@ namespace ASPCoreWebApi.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public ActionResult<Student> getallstudent(int id) {
+        public ActionResult<Student> GetstudentById(int id) {
         
             if (id <= 0)
             {
@@ -83,7 +83,7 @@ namespace ASPCoreWebApi.Controllers
         }
 
         [HttpGet("{name:alpha}")]
-        public ActionResult<Student> getallstudent(string name)
+        public ActionResult<Student> GetstudentByName(string name)
         {
             if (name == null)
             {
@@ -93,6 +93,16 @@ namespace ASPCoreWebApi.Controllers
             // OK -200 status
             return Ok(StudentRepository.students.FirstOrDefault(x => x.Name == name));
 
+        }
+
+        [HttpDelete("{id}")]
+
+        public ActionResult DeleteStudent(int id)
+        {
+            var stu=StudentRepository.students.FirstOrDefault(x=> x.Id==id);
+                
+            StudentRepository.students.Remove(stu);
+            return Ok($" {stu.Name} Student Deleted sucessfully");
         }
     }
 }
