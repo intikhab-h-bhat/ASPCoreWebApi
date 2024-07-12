@@ -60,7 +60,9 @@ namespace ASPCoreWebApi.Controllers
             //};
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet]
+        //[HttpGet("{id:int}")]
+        [Route("{id:int}",Name = "GetStudentById")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
