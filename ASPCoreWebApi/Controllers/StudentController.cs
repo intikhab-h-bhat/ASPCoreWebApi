@@ -34,7 +34,7 @@ namespace ASPCoreWebApi.Controllers
 
         [HttpGet]
         [Route("All",Name ="GetAllStudents")]
-        public ActionResult<List<Student>> Getstudents()
+        public ActionResult<IEnumerable<Student>> Getstudents()
         {
             // return students;
 
@@ -78,22 +78,28 @@ namespace ASPCoreWebApi.Controllers
             if (student == null)           
                 // NotFound -404 status
                 return NotFound($"The student id {id} you are looking doesnot exist");
-            
+
             // Ok -200 status
-            return Ok(StudentRepository.students.FirstOrDefault(x=> x.Id==id));
-        
+            //return Ok(StudentRepository.students.FirstOrDefault(x=> x.Id==id));
+            return Ok(student);
         }
 
         [HttpGet("{name:alpha}")]
         public ActionResult<Student> GetstudentByName(string name)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
+                return BadRequest();
+
+            var student=StudentRepository.students.FirstOrDefault(x=>x.Name == name);
+
+            if (student == null)
             {
-                return NotFound("The");
+                // NotFound -404 status
+                return NotFound("The Student Name does not exist");
             }
 
             // OK -200 status
-            return Ok(StudentRepository.students.FirstOrDefault(x => x.Name == name));
+            return Ok(student);
 
         }
 
@@ -101,8 +107,16 @@ namespace ASPCoreWebApi.Controllers
 
         public ActionResult DeleteStudent(int id)
         {
+            if (id <= 0)
+            {
+                // Badrequest -400 status
+                return BadRequest("The id cannot be 0 or less than 0");
+            }
             var stu=StudentRepository.students.FirstOrDefault(x=> x.Id==id);
-                
+            if (stu == null)
+                // NotFound -404 status
+                return NotFound($"The student id {id} you are looking doesnot exist");
+
             StudentRepository.students.Remove(stu);
             return Ok($" {stu.Name} Student Deleted sucessfully");
         }
